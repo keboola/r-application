@@ -14,7 +14,7 @@ install_github('keboola/r-application', ref = 'master')
 ## Examples
 ```
 # Subclass the class to do something useful
-DockerApplication <- setRefClass(
+MyApplication <- setRefClass(
     'MyApplication',
     contains = c("Application"),
     fields = list(
@@ -25,3 +25,6 @@ DockerApplication <- setRefClass(
     )
 )
 ```
+
+app <- MyApplication$new()
+app->logDebug("Some message")
