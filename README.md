@@ -24,7 +24,7 @@ MyApplication <- setRefClass(
     ...
     )
 )
-```
 
 app <- MyApplication$new()
 app->logDebug("Some message")
+```
