@@ -1,0 +1,13 @@
+Package: keboola.r.application
+Type: Package
+Title: Base application class
+Version: 1.0
+Date: 2015-05-04
+Author: Ondrej Popelka
+Maintainer: Ondrej Popelka <ondrej.popelka@keboola.com>
+Depends:
+	methods
+Suggests:
+	testthat
+Description: Serves as an ancestor for applications, does nothing.
+License: MIT + file LICENSE
