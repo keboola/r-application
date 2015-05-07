@@ -97,16 +97,13 @@ Application <- setRefClass(
             con <- textConnection("printOut", open = "w", local = TRUE)
             sink(con, type = c("output", "message"))
             if (is.character(msg)) {
-#                printOut <- 
-                    print(paste(format(
+                print(paste(format(
                     Sys.time(), "%Y-%m-%d %H:%M:%OS3"), ':',
                     msg))
             } else {
-                #printOut <- 
-                    print(format(
+                print(format(
                     Sys.time(), "%Y-%m-%d %H:%M:%OS3"))
-                #printOut <- 
-                    print(msg)
+                print(msg)
             }
             sink(NULL, type = c("output", "message"))
             close(con)
