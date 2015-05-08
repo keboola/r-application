@@ -169,6 +169,26 @@ Application <- setRefClass(
             if (vexpr$visible) vexpr$value else invisible(vexpr$value)
         },
 
+        ' Split a string into tokens using the given split character.
+        #'
+        #' @param string Arbitrary string.
+        #' @param splitChar Split character.
+        #' @param asLogical If true than a vector of TRUEs indexed by token name will be returned
+        #'  if false (default) then a vector of tokens will be indexed.
+        split = function(string, splitChar, asLogical = FALSE)
+        {
+            # split
+            tokens <- strsplit(string, splitChar)[[1]]
+            # trim whitespace from each item
+            tokens <- lapply(tokens, function (x) {gsub("^\\s+|\\s+$", "", x)})                   
+            if (asLogical) {
+                logtokens <- logical()
+                lapply(tokens, function (x) {logtokens[x] <<- TRUE})
+                tokens <- logtokens
+            }
+            tokens
+        },
+
         #' Main entry point
         run = function() {
             stop("Not implemented.")
