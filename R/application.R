@@ -169,7 +169,7 @@ Application <- setRefClass(
             if (vexpr$visible) vexpr$value else invisible(vexpr$value)
         },
 
-        ' Split a string into tokens using the given split character.
+        #' Split a string into tokens using the given split character.
         #'
         #' @param string Arbitrary string.
         #' @param splitChar Split character.
