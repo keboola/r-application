@@ -8,6 +8,7 @@ test_that("empty", {
     expect_equal(app$empty(c()), TRUE)
     expect_equal(app$empty(c(NA)), TRUE)
     expect_equal(app$empty(c("", "")), TRUE)
+    expect_equal(app$empty(list()), TRUE)
     
     expect_equal(app$empty(c("", 1)), FALSE)
 })

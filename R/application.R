@@ -31,7 +31,9 @@ Application <- setRefClass(
         #' Verify that a value is empty
         #' @param Character or number or vector of those.
         empty = function(obj) {
-            if (class(obj) == 'character') {
+            if (length(obj) == 0) {
+                ret <- TRUE
+            } else if (class(obj) == 'character') {
                 ret <- (nchar(obj) == 0)
             } else if (class(obj) == 'numeric') {
                 ret <- obj == 0
