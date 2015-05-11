@@ -10,7 +10,9 @@ Application <- setRefClass(
         # for wrapTryCatch
         hasFailed = 'logical',
         messages = 'list',
-        warnings = 'list'
+        warnings = 'list',
+        # internal for split
+        logtokens = 'list'
     ),
     methods = list(
         #' Constructor.
@@ -184,7 +186,7 @@ Application <- setRefClass(
             # trim whitespace from each item
             tokens <- lapply(tokens, function (x) {gsub("^\\s+|\\s+$", "", x)})                   
             if (asLogical) {
-                logtokens <- logical()
+                logtokens <<- logical()
                 lapply(tokens, function (x) {logtokens[x] <<- TRUE})
                 tokens <- logtokens
             }
