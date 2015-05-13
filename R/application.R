@@ -116,6 +116,7 @@ Application <- setRefClass(
             } else {
                 write(printOut, stderr())
             }
+            flush.console()
         },
 
         #' Error handling wrapper which prints Java like stack trace in case of error.
