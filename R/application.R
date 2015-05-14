@@ -12,7 +12,7 @@ Application <- setRefClass(
         messages = 'list',
         warnings = 'list',
         # internal for splitString
-        logtokens = 'list'
+        logTokens = 'ANY'
     ),
     methods = list(
         #' Constructor.
@@ -187,9 +187,9 @@ Application <- setRefClass(
             # trim whitespace from each item
             tokens <- lapply(tokens, function (x) {gsub("^\\s+|\\s+$", "", x)})                   
             if (asLogical) {
-                logtokens <<- logical()
+                logTokens <<- logical()
                 lapply(tokens, function (x) {logtokens[x] <<- TRUE})
-                tokens <- logtokens
+                tokens <- logTokens
             }
             tokens
         },
