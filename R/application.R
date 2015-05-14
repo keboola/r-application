@@ -11,7 +11,7 @@ Application <- setRefClass(
         hasFailed = 'logical',
         messages = 'list',
         warnings = 'list',
-        # internal for split
+        # internal for splitString
         logtokens = 'list'
     ),
     methods = list(
@@ -180,7 +180,7 @@ Application <- setRefClass(
         #' @param splitChar Split character.
         #' @param asLogical If true than a vector of TRUEs indexed by token name will be returned
         #'  if false (default) then a vector of tokens will be indexed.
-        split = function(string, splitChar, asLogical = FALSE)
+        splitString = function(string, splitChar, asLogical = FALSE)
         {
             # split
             tokens <- strsplit(string, splitChar)[[1]]
