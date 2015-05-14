@@ -188,7 +188,7 @@ Application <- setRefClass(
             tokens <- lapply(tokens, function (x) {gsub("^\\s+|\\s+$", "", x)})                   
             if (asLogical) {
                 logTokens <<- logical()
-                lapply(tokens, function (x) {logtokens[x] <<- TRUE})
+                lapply(tokens, function (x) {logTokens[x] <<- TRUE})
                 tokens <- logTokens
             }
             tokens
