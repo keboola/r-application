@@ -19,9 +19,9 @@ Application <- setRefClass(
         #'
         #' @exportMethod
         initialize = function(debugMode = FALSE) {
-            debugMode <<- debugMode
+            debugMode <<- debugMode;
         },
-
+;
         #' Constructor.
         #'
         #` @param debugMode Logical TRUE to turn debugging on.
