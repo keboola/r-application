@@ -10,7 +10,7 @@ Application <- setRefClass(
         # for wrapTryCatch
         hasFailed = 'logical',
         messages = 'list',
-        warnings = 'list',
+        #warnings = 'list',
         # internal for splitString
         logTokens = 'ANY'
     ),
