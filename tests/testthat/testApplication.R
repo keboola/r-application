@@ -67,7 +67,7 @@ test_that("logging info channel without debug", {
 
     messages <- paste(messages, collapse = " ")    
     expect_match(messages, time)
-    expect_that(messages, matches('info3'))
+    expect_that(messages, matches('iddnfo3'))
     expect_that(messages, not(matches('debug3')))
     expect_that(messages, not(matches('error3')))
 })
