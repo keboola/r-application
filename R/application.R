@@ -15,24 +15,29 @@ Application <- setRefClass(
         logTokens = 'ANY'
     ),
     methods = list(
-        #' Constructor.
-        #'
-        #' @exportMethod
         initialize = function(debugMode = FALSE) {
+            "Constructor.
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{debugMode} Set higher logging level so that debug messages are printed.}
+            }}"
             debugMode <<- debugMode
         },
 
-        #' Constructor.
-        #'
-        #` @param debugMode Logical TRUE to turn debugging on.
-        #' @exportMethod
         setDebugMode = function(debugMode) {
+            "Change debugging mode.
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{debugMode} TRUE to turn debugging on.}
+            }}
+            \\subsection{Return Value}{New debugMode}"
             debugMode <<- debugMode
         },
 
-        #' Verify that a value is empty
-        #' @param Character or number or vector of those.
         empty = function(obj) {
+            "Verify that a value is empty
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{obj} Character or number or vector of those.}
+            }}
+            \\subsection{Return Value}{TRUE if the value is empty (array or string)}"
             if (length(obj) == 0) {
                 ret <- TRUE
             } else if (class(obj) == 'character') {
@@ -55,11 +60,12 @@ Application <- setRefClass(
             ret
         },
         
-        #' Get system environment variable
-        #' @param name Name of the environment variable
-        #' @return Value of the environment variable or null if it does not exist.
-        #' @export
         getEnv = function(name) {
+            "Get system environment variable
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{name} Name of the environment variable.}
+            }}
+            \\subsection{Return Value}{Value of the environment variable or null if it does not exist.}"
             value <- Sys.getenv(name)
             if (empty(value)) {
                 ret <- NULL
@@ -69,34 +75,45 @@ Application <- setRefClass(
             ret
         },
                 
-        #' Log a debugging message
-        #' @param msg Arbitrary msg or printable object
-        #' @export
         logDebug = function(obj) {
+            "Log a debugging message.
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{obj} Arbitrary message or printable object.}
+            }}
+            \\subsection{Return Value}{NULL}"
             if (debugMode) {
                 printLog(obj, 'stdout')
             }
+            NULL
         },
         
-        #' Log a debugging message
-        #' @param msg Arbitrary msg or printable object
-        #' @export
         logInfo = function(obj) {
+            "Log an informational message message.
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{obj} Arbitrary message or printable object.}
+            }}
+            \\subsection{Return Value}{NULL}"
             printLog(obj, 'stdout')
+            NULL
         },
         
-        #' Log a debugging message
-        #' @param msg Arbitrary msg or printable object
-        #' @export
         logError = function(obj) {
+            "Log an error message.
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{obj} Arbitrary message or printable object.}
+            }}
+            \\subsection{Return Value}{NULL}"
             printLog(obj, 'stderr')
+            NULL
         },
 
-        #' Helper function to print timestamp with each message
-        #' @param msg Arbitrary msg or printable object
-        #' @param mode Logging mode either 'stdout' or 'stderr'
-        #' @return void
         printLog = function(msg, mode = 'stdout') {
+            "Helper function to print timestamp with each message.
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{msg} Arbitrary message or printable object.}
+            \\item{\\code{mode} Logging mode either \\code{stdout} or \\code{stderr}.}
+            }}
+            \\subsection{Return Value}{NULL}"
             printOut <- ""
             con <- textConnection("printOut", open = "w", local = TRUE)
             sink(con, type = c("output", "message"))
@@ -117,12 +134,21 @@ Application <- setRefClass(
                 write(printOut, stderr())
             }
             flush.console()
+            NULL
         },
 
-        #' Error handling wrapper which prints Java like stack trace in case of error.
-        #' Comes from http://stackoverflow.com/a/24884348/41640
+        #' 
+        #' 
         #'
         wrapTryCatch = function(expr, silentSuccess = FALSE, stopIsFatal = TRUE) {
+            "Error handling wrapper which prints Java like stack trace in case of error.
+            Comes from http://stackoverflow.com/a/24884348/41640
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{expr} An expression to execute.}
+            \\item{\\code{silentSuccess} In case of success, do not print any messages.}
+            \\item{\\code{stopIsFatal} In case of error, do stop the script execution.}
+            }}
+            \\subsection{Return Value}{NULL}"
             hasFailed <<- FALSE
             messages <<- list()
             warnings <<- list()
@@ -174,14 +200,16 @@ Application <- setRefClass(
             if (vexpr$visible) vexpr$value else invisible(vexpr$value)
         },
 
-        #' Split a string into tokens using the given split character.
-        #'
-        #' @param string Arbitrary string.
-        #' @param splitChar Split character.
-        #' @param asLogical If true than a vector of TRUEs indexed by token name will be returned
-        #'  if false (default) then a vector of tokens will be indexed.
-        splitString = function(string, splitChar, asLogical = FALSE)
-        {
+        splitString = function(string, splitChar, asLogical = FALSE) {
+            "Error handling wrapper which prints Java like stack trace in case of error.
+            Comes from http://stackoverflow.com/a/24884348/41640
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{string} Arbitrary string.}
+            \\item{\\code{splitChar} Split character.}
+            \\item{\\code{asLogical} If \\code{TRUE} than a vector of TRUEs indexed by token name will be returned
+            if \\code{FALSE} (default) then a vector of tokens will be returned.}
+            }}
+            \\subsection{Return Value}{Vector of tokens}"
             # split
             tokens <- strsplit(string, splitChar)[[1]]
             # trim whitespace from each item
@@ -194,8 +222,9 @@ Application <- setRefClass(
             tokens
         },
 
-        #' Main entry point
         run = function() {
+            "Main application function.
+            \\subsection{Return Value}{NULL}"
             stop("Not implemented.")
         }
     )
