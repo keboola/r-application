@@ -67,7 +67,7 @@ Application <- setRefClass(
             }}
             \\subsection{Return Value}{Value of the environment variable or null if it does not exist.}"
             value <- Sys.getenv(name)
-            if (empty(value)) {
+            if (.self$empty(value)) {
                 ret <- NULL
             } else {
                 ret <- value
@@ -82,28 +82,38 @@ Application <- setRefClass(
             }}
             \\subsection{Return Value}{NULL}"
             if (debugMode) {
-                printLog(obj, 'stdout')
+                .self$printLog(obj, 'stdout')
             }
             NULL
         },
         
         logInfo = function(obj) {
-            "Log an informational message message.
+            "Log an informational message.
             \\subsection{Parameters}{\\itemize{
             \\item{\\code{obj} Arbitrary message or printable object.}
             }}
             \\subsection{Return Value}{NULL}"
-            printLog(obj, 'stdout')
+            .self$printLog(obj, 'stdout')
             NULL
         },
         
+        logWarning = function(obj) {
+            "Log a warning message.
+            \\subsection{Parameters}{\\itemize{
+            \\item{\\code{obj} Arbitrary message or printable object.}
+            }}
+            \\subsection{Return Value}{NULL}"
+            .self$printLog(obj, 'stdout')
+            NULL
+        },
+
         logError = function(obj) {
             "Log an error message.
             \\subsection{Parameters}{\\itemize{
             \\item{\\code{obj} Arbitrary message or printable object.}
             }}
             \\subsection{Return Value}{NULL}"
-            printLog(obj, 'stderr')
+            .self$printLog(obj, 'stderr')
             NULL
         },
 
@@ -115,31 +125,34 @@ Application <- setRefClass(
             }}
             \\subsection{Return Value}{NULL}"
             printOut <- ""
-            con <- textConnection("printOut", open = "w", local = TRUE)
-            sink(con, type = c("output", "message"))
+            if (!interactive()) {
+                con <- textConnection("printOut", open = "w", local = TRUE)
+                sink(con, type = c("output", "message"))
+            }
             if (is.character(msg)) {
-                print(paste(format(
-                    Sys.time(), "%Y-%m-%d %H:%M:%OS3"), ':',
-                    msg))
+                if (length(msg) > 1) {
+                    for (i in msg) {
+                        print(paste(format(Sys.time(), "%Y-%m-%d %H:%M:%OS3"), ':', i))
+                    }
+                } else {
+                    print(paste(format(Sys.time(), "%Y-%m-%d %H:%M:%OS3"), ':', msg))
+                }
             } else {
-                print(format(
-                    Sys.time(), "%Y-%m-%d %H:%M:%OS3"))
+                print(format(Sys.time(), "%Y-%m-%d %H:%M:%OS3"))
                 print(msg)
             }
-            sink(NULL, type = c("output", "message"))
-            close(con)
+            if (!interactive()) {
+                sink(NULL, type = c("output", "message"))
+                close(con)
+            }
             if (mode == 'stdout') {
                 write(printOut, stdout())
             } else {
                 write(printOut, stderr())
             }
-            flush.console()
             NULL
         },
 
-        #' 
-        #' 
-        #'
         wrapTryCatch = function(expr, silentSuccess = FALSE, stopIsFatal = TRUE) {
             "Error handling wrapper which prints Java like stack trace in case of error.
             Comes from http://stackoverflow.com/a/24884348/41640
@@ -179,10 +192,10 @@ Application <- setRefClass(
                     if (level == "WARN") warnings <<- append(warnings, msg)
                 } else {
                     if (silentSuccess && !hasFailed) {
-                        cat(paste(messages, collapse=""))
+                        .self$logInfo(messages)
                         hasFailed <<- TRUE
                     }
-                    cat(msg)
+                    .self$logError(msg)
                 }
                 
                 # Muffle any redundant output of the same message
@@ -195,14 +208,13 @@ Application <- setRefClass(
                 debug=logger, message=logger, warning=logger, caughtError=logger, error=logger
             )
             if (silentSuccess && !hasFailed) {
-                cat(paste(warnings, collapse=""))
+                .self$logWarning(warnings)
             }
             if (vexpr$visible) vexpr$value else invisible(vexpr$value)
         },
 
         splitString = function(string, splitChar, asLogical = FALSE) {
-            "Error handling wrapper which prints Java like stack trace in case of error.
-            Comes from http://stackoverflow.com/a/24884348/41640
+            "Split a string by a specificed split character.
             \\subsection{Parameters}{\\itemize{
             \\item{\\code{string} Arbitrary string.}
             \\item{\\code{splitChar} Split character.}
@@ -219,11 +231,11 @@ Application <- setRefClass(
                 lapply(tokens, function (x) {logTokens[x] <<- TRUE})
                 tokens <- logTokens
             }
-            tokens
+            unlist(tokens)
         },
 
         run = function() {
-            "Main application function.
+            "Main application function, this should be overriden in child class.
             \\subsection{Return Value}{NULL}"
             stop("Not implemented.")
         }
