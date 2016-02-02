@@ -42,7 +42,13 @@ Generic abstract class for an application. Provides basic functions
 }}
 \subsection{Return Value}{NULL}}
 
-\item{\code{logInfo(obj)}}{Log an informational message message.
+\item{\code{logInfo(obj)}}{Log an informational message.
+\subsection{Parameters}{\itemize{
+\item{\code{obj} Arbitrary message or printable object.}
+}}
+\subsection{Return Value}{NULL}}
+
+\item{\code{logWarning(obj)}}{Log a warning message.
 \subsection{Parameters}{\itemize{
 \item{\code{obj} Arbitrary message or printable object.}
 }}
@@ -55,7 +61,7 @@ Generic abstract class for an application. Provides basic functions
 }}
 \subsection{Return Value}{NULL}}
 
-\item{\code{run()}}{Main application function.
+\item{\code{run()}}{Main application function, this should be overriden in child class.
 \subsection{Return Value}{NULL}}
 
 \item{\code{setDebugMode(debugMode)}}{Change debugging mode.
@@ -64,8 +70,7 @@ Generic abstract class for an application. Provides basic functions
 }}
 \subsection{Return Value}{New debugMode}}
 
-\item{\code{splitString(string, splitChar, asLogical = FALSE)}}{Error handling wrapper which prints Java like stack trace in case of error.
-Comes from http://stackoverflow.com/a/24884348/41640
+\item{\code{splitString(string, splitChar, asLogical = FALSE)}}{Split a string by a specificed split character.
 \subsection{Parameters}{\itemize{
 \item{\code{string} Arbitrary string.}
 \item{\code{splitChar} Split character.}
