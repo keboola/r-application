@@ -132,14 +132,14 @@ Application <- setRefClass(
             if (is.character(msg)) {
                 if (length(msg) > 1) {
                     for (i in msg) {
-                        print(paste(format(Sys.time(), "%Y-%m-%d %H:%M:%OS3"), ':', i))
+                        cat(paste(format(Sys.time(), "%Y-%m-%d %H:%M:%OS3"), ':', i))
                     }
                 } else {
-                    print(paste(format(Sys.time(), "%Y-%m-%d %H:%M:%OS3"), ':', msg))
+                    cat(paste(format(Sys.time(), "%Y-%m-%d %H:%M:%OS3"), ':', msg))
                 }
             } else {
-                print(format(Sys.time(), "%Y-%m-%d %H:%M:%OS3"))
-                print(msg)
+                cat(format(Sys.time(), "%Y-%m-%d %H:%M:%OS3"))
+                cat(msg)
             }
             if (!interactive()) {
                 sink(NULL, type = c("output", "message"))
