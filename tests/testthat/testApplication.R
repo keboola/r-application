@@ -3,6 +3,9 @@ test_that("empty", {
     
     expect_equal(app$empty(NULL), TRUE)
     expect_equal(app$empty(NA), TRUE)
+    whacky <- 'hell'
+    whacky <- NA
+    expect_equal(app$empty(whacky), TRUE)
     expect_equal(app$empty(""), TRUE)
     expect_equal(app$empty(0), TRUE)
     expect_equal(app$empty(c()), TRUE)

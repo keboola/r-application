@@ -38,23 +38,27 @@ Application <- setRefClass(
             \\item{\\code{obj} Character or number or vector of those.}
             }}
             \\subsection{Return Value}{TRUE if the value is empty (array or string)}"
+            ret <- FALSE
             if (length(obj) == 0) {
                 ret <- TRUE
-            } else if (is.null(obj)) {
-                ret <- TRUE
-            } else if (is.na(obj)) {
-                ret <- TRUE
-            } else if (class(obj) == 'character') {
-                ret <- (nchar(obj) == 0)
-            } else if (class(obj) == 'numeric') {
-                ret <- obj == 0
-            }
-            if (length(ret) > 1) {
-                # it was a vector, check if all values of the vector were empty
-                if (length(ret[ret == TRUE]) == length(ret)) {
+            } else {
+                tmp <- sapply(obj, is.na)
+                if (length(tmp[tmp == TRUE]) == length(tmp)) {
                     ret <- TRUE
                 } else {
-                    ret <- FALSE
+                    tmp <- sapply(obj, is.null)
+                    if (length(tmp[tmp == TRUE]) == length(tmp)) {
+                        ret <- TRUE
+                    } else {
+                        if (class(obj) == 'character') {
+                            tmp <- (nchar(obj) == 0)
+                        } else if (class(obj) == 'numeric') {
+                            tmp <- obj == 0
+                        }
+                        if (length(tmp[tmp == TRUE]) == length(tmp)) {
+                            ret <- TRUE
+                        }
+                    }
                 }
             }
             ret
