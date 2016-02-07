@@ -40,17 +40,17 @@ Application <- setRefClass(
             \\subsection{Return Value}{TRUE if the value is empty (array or string)}"
             if (length(obj) == 0) {
                 ret <- TRUE
-            } else if (class(obj) == 'character') {
-                ret <- (nchar(obj) == 0)
-            } else if (class(obj) == 'numeric') {
-                ret <- obj == 0
             } else if (is.null(obj)) {
                 ret <- TRUE
             } else if (is.na(obj)) {
                 ret <- TRUE
+            } else if (class(obj) == 'character') {
+                ret <- (nchar(obj) == 0)
+            } else if (class(obj) == 'numeric') {
+                ret <- obj == 0
             }
             if (length(ret) > 1) {
-                # it was a vector, check if all values of the vector wer empty
+                # it was a vector, check if all values of the vector were empty
                 if (length(ret[ret == TRUE]) == length(ret)) {
                     ret <- TRUE
                 } else {
