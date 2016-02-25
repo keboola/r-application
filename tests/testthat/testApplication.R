@@ -74,3 +74,9 @@ test_that("logging info channel without debug", {
     expect_that(messages, not(matches('debug3')))
     expect_that(messages, not(matches('error3')))
 })
+
+test_that("logging info channel without debug", {
+    app <- Application$new()
+    l <- list(a = 42, b = list(c = 24, d = 0))
+    app$logInfo(l)  
+})

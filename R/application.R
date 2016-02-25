@@ -143,7 +143,7 @@ Application <- setRefClass(
                 }
             } else {
                 cat(format(Sys.time(), "%Y-%m-%d %H:%M:%OS3"))
-                cat(msg)
+                print(msg)
             }
             if (!interactive()) {
                 sink(NULL, type = c("output", "message"))
