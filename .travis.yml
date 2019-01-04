@@ -6,4 +6,6 @@ sudo: required
 warnings_are_errors: true
 
 notifications:
-  slack: keboola:8EW7Y0Kqvxxames1Rfp6feaE
+  slack:
+    secure: aK1YOxL/AxGpLmGfR+VbZxutyRPwek7h/ID2OTCD9DSRXEGvUTA8sZWJtpjePgr/kxbEQ32mx3ouXH2qV6n2nsb8dr/1TUJPZiiscdGAxNhrffLgHmF5d014/CF3rSO2UKHcdqqaE/WtLrTurBbw4q7OyxCnmSMteK7SBUOBptI=
+  email: false
