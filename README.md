@@ -28,3 +28,7 @@ MyApplication <- setRefClass(
 app <- MyApplication$new()
 app->logDebug("Some message")
 ```
+
+## License
+
+MIT licensed, see [LICENSE](./LICENSE) file.
